@@ -569,7 +569,7 @@ export function setFromRgbaString(color,rgbstr_or_rgbastr){
     color[0] = (+elements[0]) / 255;
     color[1] = (+elements[1]) / 255;
     color[2] = (+elements[2]) / 255;
-    color[3] = +elements[3] || 1.0;
+    color[3] = elements[3] === undefined ? 1.0 : +elements[3];
     return color;
 }
 
@@ -579,11 +579,27 @@ export function setFromRgbaString(color,rgbstr_or_rgbastr){
  * @returns {*}
  */
 export function getRgbaString(colorRgba){
-    const r = Math.floor(colorRgba[0] * 255);
-    const g = Math.floor(colorRgba[1] * 255);
-    const b = Math.floor(colorRgba[2] * 255);
-    const a = colorRgba[3];
+    return getRgbaString4(colorRgba[0],colorRgba[1],colorRgba[2],colorRgba[3]);
+}
+
+export function getRgbaString4(r,g,b,a){
+    r = Math.floor(r * 255);
+    g = Math.floor(g * 255);
+    b = Math.floor(b * 255);
+    a = a === undefined ? 1.0 : a;
     return !a ? `rgb(${r},${g},${b})` : `rgba(${r},${g},${b},${a})`;
+}
+
+export function getRgbaString3(r,g,b){
+    return getRgbaString4(r,g,b,1.0);
+}
+
+export function getRgbaString2(k,a){
+    return getRgbaString4(k,k,k,a);
+}
+
+export function getRgbaString1(k){
+    return getRgbaString4(k,k,k,1.0);
 }
 
 /**
