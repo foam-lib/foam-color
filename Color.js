@@ -979,7 +979,7 @@ function multiLerpColorInfo(color,colors,t,out){
  * @returns {*}
  */
 export function lerpRGBA(colora,colorb,t){
-    lerpedRGB(colora,colorb,t);
+    lerpRGB(colora,colorb,t);
     colora[3] = colora[3] * (1.0 - t) + colorb[3] * t;
     return colora;
 }
